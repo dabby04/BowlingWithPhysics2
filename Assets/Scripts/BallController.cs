@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.Events;
 
+[RequireComponent(typeof(Rigidbody))]
 public class BallController : MonoBehaviour
 {
     [SerializeField] private float force=1f;
@@ -16,6 +18,16 @@ public class BallController : MonoBehaviour
         transform.parent=ballAnchor;
         transform.localPosition=Vector3.zero;
         ballRB.isKinematic=true;
+        ResetBall();
+    }
+
+    public void ResetBall(){
+        isBallLaunched=false;
+
+        ballRB.isKinematic=true;
+        launchIndicator.gameObject.SetActive(true);
+        transform.parent=ballAnchor;
+        transform.localPosition=Vector3.zero;
     }
 
     private void LaunchBall(){
